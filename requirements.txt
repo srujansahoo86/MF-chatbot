@@ -8,3 +8,4 @@
 # Ensure production server is present
 gunicorn==22.0.0
 uvicorn==0.29.0
+httpx==0.27.2
