@@ -1,0 +1,10 @@
+# Root Requirements File
+# Connects all sub-requirements for easy Cloud Deployment
+
+-r scraper/requirements.txt
+-r api/requirements.txt
+-r rag_engine/requirements.txt
+
+# Ensure production server is present
+gunicorn==22.0.0
+uvicorn==0.29.0
