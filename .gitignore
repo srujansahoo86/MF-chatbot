@@ -1,0 +1,15 @@
+# Environment
+.env
+.venv/
+.venv_stable/
+*.pyc
+__pycache__/
+
+# Project specific
+data/chroma/
+.git/
+.pytest_cache/
+
+# NOTE: We are NOT ignoring data/scraped/ 
+# This allows GitHub Actions to push fresh data back to the repo 
+# which then triggers the Render auto-deploy.

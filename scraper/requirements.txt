@@ -1,0 +1,15 @@
+# Scraping Service Dependencies
+# Phase 2b — Mutual Fund FAQ Chatbot
+
+# Web scraping (JS-rendered pages)
+playwright==1.44.0
+
+# HTTP requests (lightweight fallback / health checks)
+requests==2.31.0
+
+# HTML parsing
+beautifulsoup4==4.12.3
+lxml==5.2.2
+
+# Utilities
+python-dateutil==2.9.0

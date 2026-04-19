@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic MF Chatbot</title>
+    <link rel="stylesheet" href="/static/basic_style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header>
+            <h1>Mutual Fund Assistant (Basic)</h1>
+            <p>Asking about SBI Mutual Funds</p>
+        </header>
+        
+        <div class="disclaimer">
+            Facts-only. No investment advice.
+        </div>
+        
+        <div id="chatHistory" class="chat-history">
+            <div class="message bot-message">
+                Hello! I am your factual Mutual Fund assistant. Ask me about NAV, Expense Ratio, or Exit Load of SBI funds.
+            </div>
+        </div>
+
+        <div class="example-questions">
+            <button onclick="askExample('What is the exit load for SBI Contra Fund?')">Exit Load?</button>
+            <button onclick="askExample('Minimum SIP for SBI Gold Fund?')">Min SIP?</button>
+            <button onclick="askExample('Expense ratio of SBI ELSS Tax Saver Fund?')">Expense Ratio?</button>
+        </div>
+        
+        <form id="chatForm" class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Type your question..." autocomplete="off" required>
+            <button type="submit" id="sendBtn">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+        const chatHistory = document.getElementById('chatHistory');
+        
+        // Unique session ID for each tab/thread
+        const sessionId = 'session-' + Math.random().toString(36).substr(2, 9);
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = userInput.value.trim();
+            if (!query) return;
+            handleQuery(query);
+        });
+
+        async function askExample(query) {
+            handleQuery(query);
+        }
+
+        async function handleQuery(query) {
+            // Add user message
+            addMessage(query, 'user-message');
+            userInput.value = '';
+
+            // Add typing indicator
+            const typingId = addMessage('Thinking...', 'bot-message italic');
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, session_id: sessionId })
+                });
+                const data = await response.json();
+                
+                // Remove typing indicator and add response
+                const indicator = document.getElementById(typingId);
+                if (indicator) indicator.remove();
+                
+                // Format the answer (simple markdown link replacement for source)
+                let answer = data.answer.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+                answer = answer.replace(/\n/g, '<br>');
+                
+                addMessage(answer, 'bot-message', true);
+            } catch (error) {
+                const indicator = document.getElementById(typingId);
+                if (indicator) indicator.remove();
+                addMessage('Error connecting to system.', 'bot-message error');
+            }
+        }
+
+        function addMessage(text, className, isHTML = false) {
+            const id = 'msg-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'message ' + className;
+            if (isHTML) {
+                div.innerHTML = text;
+            } else {
+                div.innerText = text;
+            }
+            chatHistory.appendChild(div);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+            return id;
+        }
+    </script>
+</body>
+</html>

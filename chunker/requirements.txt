@@ -1,0 +1,13 @@
+# Chunking & Embedding Dependencies
+# Phase 3 — Mutual Fund FAQ Chatbot
+
+# Text splitters and document loading
+langchain==0.1.16
+langchain-text-splitters==0.0.1
+langchain-community==0.0.34
+
+# Local embeddings
+sentence-transformers==2.7.0
+
+# Local vector database
+chromadb==0.5.0

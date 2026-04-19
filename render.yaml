@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: mf-chatbot-api
+    runtime: python
+    buildCommand: "pip install -r scraper/requirements.txt -r api/requirements.txt -r rag_engine/requirements.txt"
+    startCommand: "uvicorn api.server:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0

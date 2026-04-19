@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBI Mutual Fund AI Assistant</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (for sleek SVG icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    
+    <div class="app-wrapper">
+        <!-- Persistent Sidebar (Left) -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="app-logo">
+                    <span class="logo-text">The Digital Vault</span>
+                </div>
+                
+                <div class="advisor-profile">
+                    <div class="profile-avatar">
+                        <i class="ph-fill ph-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-name">Advisor Profile</span>
+                        <span class="profile-role">Investment Desk</span>
+                    </div>
+                </div>
+
+                <button class="new-portfolio-btn">
+                    <i class="ph-bold ph-plus"></i> New Portfolio
+                </button>
+
+                <div class="nav-section">
+                    <span class="section-label">CURATED FUNDS</span>
+                    <nav class="fund-nav">
+                        <button class="nav-item active" data-fund="SBI Contra Fund">
+                            <i class="ph-fill ph-chart-line-up"></i> Growth Equity
+                        </button>
+                        <button class="nav-item" data-fund="SBI Gold Fund">
+                            <i class="ph-bold ph-seal-check"></i> Commodity / Gold
+                        </button>
+                        <button class="nav-item" data-fund="SBI ELSS Tax Saver Fund">
+                            <i class="ph-bold ph-drop"></i> Liquid Debt
+                        </button>
+                        <button class="nav-item" data-fund="SBI Children's Fund - Investment Plan">
+                            <i class="ph-bold ph-leaf"></i> ESG Vision
+                        </button>
+                        <button class="nav-item" data-fund="SBI Children's Fund - Savings Plan">
+                            <i class="ph-bold ph-chart-pie"></i> Midcap Momentum
+                        </button>
+                    </nav>
+                </div>
+            </div>
+            
+            <div class="sidebar-bottom">
+                <div class="disclaimer-mini">
+                    <p>Factual AI Assistant. No advisory provided.</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace (Right) -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="content-header">
+                <nav class="top-nav">
+                    <a href="#" class="active">Portfolio</a>
+                    <a href="#">Insights</a>
+                    <a href="#">Help</a>
+                </nav>
+                <div class="header-tools">
+                    <i class="ph ph-bell"></i>
+                    <div class="user-circle">
+                        <i class="ph ph-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Conversation & Analysis Area -->
+            <div class="workspace-area">
+                <div id="chatHistory" class="chat-history">
+                    <!-- AI Initial Message -->
+                    <div class="message bot-message slide-in">
+                        <div class="ai-bubble">
+                            <p>Good morning. I've analyzed the SBI Mutual Funds you requested. Select a fund from the Digital Vault on the left to begin your analysis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Input Area -->
+            <div class="input-container">
+                <div class="quick-actions">
+                    <button class="chip">COMPARE PORTFOLIO</button>
+                    <button class="chip">RISK ASSESSMENT</button>
+                    <button class="chip">TAX SUMMARY</button>
+                </div>
+                
+                <form id="chatForm" class="control-bar">
+                    <div class="input-wrapper">
+                        <i class="ph ph-paperclip"></i>
+                        <input 
+                            type="text" 
+                            id="userInput" 
+                            placeholder="Ask your advisor about funds, yields, or risks..."
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" id="sendBtn" class="send-action">
+                            <i class="ph-bold ph-arrow-up"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Typing Indicator Template (Hidden) -->
+    <template id="typingTemplate">
+        <div class="message bot-message typing-indicator">
+            <div class="avatar"><i class="ph-fill ph-robot"></i></div>
+            <div class="message-content typing-bubbles">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </template>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
