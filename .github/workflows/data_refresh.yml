@@ -9,6 +9,8 @@ jobs:
   data-refresh:
     name: Scrape → Chunk → Embed → Update Vector Store
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       # ── 1. Checkout Repository ────────────────────────────────────────────
