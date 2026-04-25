@@ -282,8 +282,8 @@ async def chat_endpoint(request: ChatRequest):
     return ChatResponse(answer=f"I am currently experiencing a system error with my AI providers. (Local context preview: {context[:100]}...)", status="error")
 
 @app.get("/")
-def home():
-    return FileResponse(UI_DIR / "basic_index.html")
+def read_root():
+    return FileResponse("ui/basic_index.html")
 
 app.mount("/static", StaticFiles(directory=str(UI_DIR)), name="static")
 
